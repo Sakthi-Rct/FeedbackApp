@@ -2,21 +2,31 @@
   <div>
     <div class="profile-wrap">
       <div class="profile-photo">
-        <img src="img" alt="user profile" />
+        <img :src="img" alt="user profile" />
       </div>
       <div class="profile-details">
         <p class="user-name">
           {{ firstName + ' ' + lastName }}
         </p>
-        <button @click="signOut">Log Out</button>
+        <button @click="signOut" v-if="displaySignout === true">Log Out</button>
       </div>
     </div>
-    <p>profile info component</p>
+    <!-- <div class="profile-wrap team-members-list">
+      <div class="profile-photo">
+        <img :src="memberImage" alt="team members" />
+      </div>
+      <div class="profile-details">
+        <p class="user-name">
+          {{ memberName }}
+        </p>
+      </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import firebase from "firebase";
+import firebase from "firebase"
+import { CLEAR_USER, HIDE_PROFILE } from '@/store/actions.type'
 
 export default {
   name: "ProfileInfo",
@@ -29,13 +39,15 @@ export default {
     },
     img: {
       type: String
+    },
+    displaySignout: {
+      type: Boolean
     }
   },
   data: function() {
     return {
-      // firstName: this.$store.state.currentUser.name.first_name,
-      // lastName: this.$store.state.currentUser.name.last_name,
-      // profilePicture: this.$store.state.currentUser.profile_picture
+      currentUser: null,
+      showUserProfile: false
     };
   },
   methods: {
@@ -45,10 +57,10 @@ export default {
         .signOut()
         .then(() => {
           this.$router.push("/login");
-          this.$store.state.currentUser = '';
+          this.$store.dispatch(CLEAR_USER, this.currentUser);
+          this.$store.dispatch(HIDE_PROFILE, this.showUserProfile)
         });
       e.preventDefault();
-      this.$store.state.userProfile = false;
     }
   }
 };

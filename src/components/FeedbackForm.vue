@@ -25,10 +25,16 @@ export default {
   },
   methods: {
     feedbackSubmit(e) {
-      const database = firebase.database();
-      database.ref('users').push().set({email: 'sakthi@happyfox.com'})
-      console.log('submitform', this.pros, this.cons);
+      const database = firebase.database()
+      database.ref('users').child('Jy5qtC5yW0a8VlAlO0ZBS0CraFE3').update({pros: this.pros, cons: this.cons})
+      console.log('submitform', this.pros, this.cons)
+      console.log('currentUser', this.getCurrentUser)
       e.preventDefault();
+    }
+  },
+  computed: {
+    getCurrentUser() {
+      return this.$store.state.profile.currentUser
     }
   }
 };

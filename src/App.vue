@@ -13,7 +13,7 @@ export default {
     const database = firebase.database();
     database.ref('users').on('value', snapshot => {
       this.$store.dispatch(LOGIN, snapshot.val());
-      console.log(snapshot.val());
+      console.log(snapshot.val())
     });
   }
 }

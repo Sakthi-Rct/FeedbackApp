@@ -7,21 +7,11 @@
           <h1>Log in to provide a feedback</h1>
           <form>
             <div class="form-field">
-              <input
-                type="text"
-                class="text-box"
-                v-model="email"
-                placeholder="Email"
-              />
+              <input type="text" class="text-box" v-model="email" placeholder="Email"/>
               <!-- <label for="email">Email</label> -->
             </div>
             <div class="form-field">
-              <input
-                type="password"
-                class="text-box"
-                v-model="password"
-                placeholder="Password"
-              />
+              <input type="password" class="text-box" v-model="password" placeholder="Password" />
               <!-- <label for="password">Password</label> -->
             </div>
             <a href="">Forgot Password?</a>
@@ -41,7 +31,7 @@
 <script>
 import AsidePanel from "@/components/AsidePanel.vue"
 import firebase from "firebase"
-import { CURRENT_USER } from '@/store/actions.type'
+import { CURRENT_USER, SHOW_PROFILE } from '@/store/actions.type'
 
 export default {
   name: "Login",
@@ -52,19 +42,20 @@ export default {
     return {
       email: "",
       password: "",
-      loggedUser: null
+      loggedUser: null,
+      showUserProfile: true
     };
   },
   methods: {
     login: function(e) {
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(
-          user => {
+        .then(()  => {
             for (var i = 0; i < this.getAllUsersLength; i++) {
-              if (this.getAllUsers[i].email == user.email) {
+              if (this.getAllUsers[i].email == this.email) {
                 this.loggedUser = this.getAllUsers[i];
                 this.$store.dispatch(CURRENT_USER, this.loggedUser)
+                this.$store.dispatch(SHOW_PROFILE, this.showUserProfile)
                 break;
               }
             }
@@ -93,8 +84,6 @@ export default {
     getAllUsersLength() {
       return this.$store.state.profile.usersList.length
     }
-  },
-  created() {
   }
 };
 </script>

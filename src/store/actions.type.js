@@ -1,2 +1,5 @@
 export const LOGIN = 'LOGIN'
 export const CURRENT_USER = 'CURRENT_USER'
+export const CLEAR_USER = 'CLEAR_USER'
+export const SHOW_PROFILE = 'SHOW_PROFILE'
+export const HIDE_PROFILE = 'HIDE_PROFILE'
