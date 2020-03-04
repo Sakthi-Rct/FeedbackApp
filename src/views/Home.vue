@@ -1,22 +1,14 @@
 <template>
-  <div class="main-page">
-    <AsidePanel />
-    <div class="main-right-content">
-      <h1>Provide Feedback</h1>
-      <FeedbackForm />
-    </div>
-  </div>
+    <PlaceHolder />
 </template>
 
 <script>
-import AsidePanel from "@/components/AsidePanel.vue";
-import FeedbackForm from "@/components/FeedbackForm.vue";
+import PlaceHolder from "@/components/PlaceHolder.vue"
 
 export default {
   name: "Home",
   components: {
-    AsidePanel,
-    FeedbackForm
+    PlaceHolder
   },
   data: function() {
     return {};

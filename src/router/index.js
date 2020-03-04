@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Home from "@/views/Home.vue";
 import Login from "@/views/Login.vue";
 import SignUp from "@/views/SignUp.vue";
+import FeedbackForm from "@/components/FeedbackForm.vue";
 
 Vue.use(VueRouter);
 
@@ -30,6 +31,14 @@ const routes = [
     path: "/home",
     name: "Home",
     component: Home,
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: "/members/:memberId",
+    name: "FeedbackForm",
+    component: FeedbackForm,
     meta: {
       requiresAuth: true
     }

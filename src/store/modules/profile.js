@@ -3,21 +3,24 @@ import {
   CURRENT_USER, 
   CLEAR_USER, 
   SHOW_PROFILE,
-  HIDE_PROFILE 
+  HIDE_PROFILE,
+  MEMBER_ID
 } from '@/store/actions.type';
 import { 
   UPDATE_USERS_LIST, 
   UPDATE_CURRENT_USER, 
   CLEAR_CURRENT_USER, 
   SHOW_USER_PROFILE ,
-  HIDE_USER_PROFILE
+  HIDE_USER_PROFILE,
+  MEMBER_ID_UPDATE
 } from '@/store/mutations.type';
 
 const state = {
   loginEmail: '',
   userProfile: false,
   usersList: [],
-  currentUser: null
+  currentUser: null,
+  memberId: null
 };
 
 const actions = {
@@ -40,6 +43,9 @@ const actions = {
   },
   [HIDE_PROFILE] ({ commit }, hideProfile) {
     commit('HIDE_USER_PROFILE', hideProfile)
+  },
+  [MEMBER_ID] ({ commit }, memberId) {
+    commit('MEMBER_ID_UPDATE', memberId)
   }
 };
 
@@ -58,6 +64,9 @@ const mutations = {
   },
   [HIDE_USER_PROFILE] (state, hideUserProfile) {
     state.userProfile = hideUserProfile
+  },
+  [MEMBER_ID_UPDATE] (state, memberIdUpdate) {
+    state.memberId = memberIdUpdate
   }
 };
 

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="61px" height="61px" viewBox="0 0 61 61" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>ic_sentiment_neutral_black_24px</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Web-App" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="01-Feedback" transform="translate(-645.000000, -264.000000)">
+            <g id="ic_sentiment_neutral_black_24px" transform="translate(640.000000, 259.000000)">
+                <polygon id="Shape" fill="#D3D4D5" fill-rule="nonzero" points="26.625 41.4166667 44.375 41.4166667 44.375 45.8541667 26.625 45.8541667"></polygon>
+                <circle id="Oval" fill="#D3D4D5" fill-rule="nonzero" cx="45.8541667" cy="28.1041667" r="4.4375"></circle>
+                <circle id="Oval" fill="#D3D4D5" fill-rule="nonzero" cx="25.1458333" cy="28.1041667" r="4.4375"></circle>
+                <path d="M35.4704167,5.91666667 C19.1404167,5.91666667 5.91666667,19.17 5.91666667,35.5 C5.91666667,51.83 19.1404167,65.0833333 35.4704167,65.0833333 C51.83,65.0833333 65.0833333,51.83 65.0833333,35.5 C65.0833333,19.17 51.83,5.91666667 35.4704167,5.91666667 Z M35.5,59.1666667 C22.4241667,59.1666667 11.8333333,48.5758333 11.8333333,35.5 C11.8333333,22.4241667 22.4241667,11.8333333 35.5,11.8333333 C48.5758333,11.8333333 59.1666667,22.4241667 59.1666667,35.5 C59.1666667,48.5758333 48.5758333,59.1666667 35.5,59.1666667 Z" id="Shape" fill="#D3D4D5" fill-rule="nonzero"></path>
+                <polygon id="Shape" points="0 0 71 0 71 71 0 71"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

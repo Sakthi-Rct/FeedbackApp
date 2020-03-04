@@ -6,23 +6,25 @@
           <img src="../assets/logo.svg" alt="Feedback Logo" />
         </a>
       </div>
-<button @click="signOut">Log Out</button>
-      <ProfileInfo v-if="userProfile" 
+<!-- <button @click="signOut">Log Out</button> -->
+      <ProfileInfo v-if="getUserProfile" 
         :img="this.getProfileImage"
         :firstName="this.getUserName.first_name"
         :lastName="this.getUserName.last_name"
         :displaySignout="true"
         />
-      <div class="members-list" v-if="userProfile">
+      <div class="members-list" v-if="getUserProfile">
         <h3>Your Teammates</h3>
         <ul>
-          <li v-for="member in membersList" :key="member.id" >
-            <ProfileInfo 
-              :img="member.profile_picture"
-              :firstName="member.name.first_name"
-              :lastName="member.name.last_name"
-              v-if="member.email !== getCurrentUserMail"
-            />
+          <li v-for="member in membersList" :key="member.userId" @click="memberIdUpdate">
+            <router-link :to="`/members/${member.userId}`">
+              <ProfileInfo 
+                :img="member.profile_picture"
+                :firstName="member.name.first_name"
+                :lastName="member.name.last_name"
+                v-if="member.email !== getCurrentUserMail"
+              />
+            </router-link>
           </li>
         </ul>
       </div>
@@ -33,7 +35,7 @@
 <script>
 import ProfileInfo from "@/components/ProfileInfo.vue"
 import firebase from "firebase"
-import { CLEAR_USER, HIDE_PROFILE } from '@/store/actions.type'
+import { CLEAR_USER, HIDE_PROFILE, MEMBER_ID } from '@/store/actions.type'
 
 export default {
   name: "AsidePanel",
@@ -42,9 +44,7 @@ export default {
   },
   data: function() {
     return {
-      userProfile: this.$store.state.profile.userProfile,
-      currentUser: null,
-      membersList: null
+      currentUser: null
     }
   },
   methods: {
@@ -58,11 +58,14 @@ export default {
           this.$store.dispatch(HIDE_PROFILE, this.showUserProfile)
         });
       e.preventDefault();
+    },
+    memberIdUpdate() {
+      this.$store.dispatch(MEMBER_ID, this.memberId)
     }
   },
   created: function() {
-    this.membersList = this.$store.state.profile.usersList
-    console.log('created', this.$store.state.profile.usersList)
+    // this.membersList = this.$store.state.profile.usersList
+    // console.log('created', this.$store.state.profile.usersList)
   },
   computed: {
     getUserName() {
@@ -76,12 +79,24 @@ export default {
     },
     getProfileImage() {
       return this.$store.state.profile.currentUser.profile_picture
+    },
+    getUserProfile() {
+      return this.$store.state.profile.userProfile
+    },
+    membersList() {
+      return this.$store.state.profile.usersList
+    },
+    memberId() {
+      return this.$route.params.memberId
     }
   }
 };
 </script>
 
 <style lang="scss">
+.profile-wrap.active {
+    background-color: #ddd;
+}
 .aside-section {
   width: 25%;
   height: 100vh;
@@ -158,10 +173,14 @@ export default {
         li {
           cursor: pointer;
           margin-bottom: 30px;
-
-          .user-name {
-            font-size: 14px;
-            font-weight: 500;
+          
+          a {
+            text-decoration: none;
+            
+            .user-name {
+              font-size: 14px;
+              font-weight: 500;
+            }
           }
         }
       }
@@ -172,6 +191,8 @@ export default {
     }
   }
 }
+
+
 
 @media (min-width: 1500px) {
   .aside-section {

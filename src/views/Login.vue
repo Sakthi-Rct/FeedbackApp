@@ -1,49 +1,42 @@
 <template>
   <div class="login-page">
-    <AsidePanel />
-    <div class="login-form-section">
-      <div class="login-wrap">
-        <div class="login">
-          <h1>Log in to provide a feedback</h1>
-          <form>
-            <div class="form-field">
-              <input type="text" class="text-box" v-model="email" placeholder="Email"/>
-              <!-- <label for="email">Email</label> -->
-            </div>
-            <div class="form-field">
-              <input type="password" class="text-box" v-model="password" placeholder="Password" />
-              <!-- <label for="password">Password</label> -->
-            </div>
-            <a href="">Forgot Password?</a>
-            <p>length is {{ getAllUsersLength }}</p>
-            <button @click="login" class="button">Log In</button>
-            <p class="register-link">
-              Don't have an account?
-              <router-link to="/sign-up">Register</router-link>
-            </p>
-          </form>
-        </div>
+    <div class="login-wrap">
+      <div class="login">
+        <h1>Log in to provide a feedback</h1>
+        <form>
+          <div class="form-field">
+            <input type="text" class="text-box" v-model="email" placeholder="Email"/>
+            <!-- <label for="email">Email</label> -->
+          </div>
+          <div class="form-field">
+            <input type="password" class="text-box" v-model="password" placeholder="Password" />
+            <!-- <label for="password">Password</label> -->
+          </div>
+          <!-- <a href="">Forgot Password?</a> -->
+          <button @click="login" class="button">Log In</button>
+          <!-- <p class="register-link">
+            Don't have an account?
+            <router-link to="/sign-up">Register</router-link>
+          </p> -->
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AsidePanel from "@/components/AsidePanel.vue"
 import firebase from "firebase"
 import { CURRENT_USER, SHOW_PROFILE } from '@/store/actions.type'
 
 export default {
   name: "Login",
   components: {
-    AsidePanel
   },
   data: function() {
     return {
       email: "",
       password: "",
-      loggedUser: null,
-      showUserProfile: true
+      loggedUser: null
     };
   },
   methods: {
@@ -55,16 +48,11 @@ export default {
               if (this.getAllUsers[i].email == this.email) {
                 this.loggedUser = this.getAllUsers[i];
                 this.$store.dispatch(CURRENT_USER, this.loggedUser)
-                this.$store.dispatch(SHOW_PROFILE, this.showUserProfile)
+                this.$store.dispatch(SHOW_PROFILE, true)
                 break;
               }
             }
             this.$router.push("/home");
-          },
-          err => {
-            console.log(err.message);
-            this.loggedUser = null;
-            this.$store.dispatch(CURRENT_USER, this.loggedUser)
           }
         ).catch(
           err => {
@@ -90,11 +78,8 @@ export default {
 
 <style lang="scss">
 .login-page {
-  display: flex;
-  justify-content: left;
-}
-.login-form-section {
-  width: 75%;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;

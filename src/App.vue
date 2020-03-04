@@ -1,14 +1,23 @@
 <template>
   <div id="app">
-    <router-view />
+    <div class="main-page">
+      <AsidePanel />
+      <div class="main-right-content">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import AsidePanel from "@/components/AsidePanel.vue";
 import firebase from "firebase";
 import { LOGIN } from '@/store/actions.type'
 
 export default {
+  components: {
+    AsidePanel
+  },
   created () {
     const database = firebase.database();
     database.ref('users').on('value', snapshot => {
